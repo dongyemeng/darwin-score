@@ -27,6 +27,6 @@ Please let me know your thoughts about how you would like to use this to score y
 - Fix various character encoding issues
 - Error checking
 - Lots of little fixes to make it cleaner
-- tools for expanding and augmenting dictionaries
+- Add tools for expanding and augmenting dictionaries
 - Add weighted score for patterns (which should account for the fact that pattern matches aren't robust and may have false positives)
 - What else? Let me know.
