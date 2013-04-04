@@ -1,0 +1,2 @@
+samples/test/BRIT11199-ocr.txt
+samples/test/BRIT11199-transcribed.txt
