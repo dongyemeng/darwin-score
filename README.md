@@ -21,12 +21,6 @@ To use with your own input files, create an input file with the paths of the fil
 
 Please let me know your thoughts about how you would like to use this to score your own data, and how the scores should be output or stored.
 
-## TODO
+## TODO and Roadmap
 
-- Allow command line parameters for input, output, etc.
-- Fix various character encoding issues
-- Error checking
-- Lots of little fixes to make it cleaner
-- Add tools for expanding and augmenting dictionaries
-- Add weighted score for patterns (which should account for the fact that pattern matches aren't robust and may have false positives)
-- What else? Let me know.
+I'll be adding some of the tools I used to generate and maintain the dictionaries. See the [TODO list](/TODO.md) for details.
