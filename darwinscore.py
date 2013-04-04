@@ -33,24 +33,11 @@ punct = '“”‘’' + string.punctuation # Add more punctuation to existing P
 startTime = datetime.now()
 print 'Loading inputs.'
 
-inputFileList = [
-'samples/nybg_gold/NY_00020326.txt',
-'samples/nybg_gold/NY_00040685.txt',
-'samples/nybg_gold/NY_00040904.txt',
-'samples/nybg_gold/NY_00040919.txt',
-'samples/nybg_gold/NY_00191205.txt',
-'samples/nybg_gold/NY_00198945.txt',
-'samples/nybg_gold/NY_00198980.txt',
-'samples/nybg_gold/NY_00198985.txt',
-'samples/nybg_gold/NY_00198990.txt',
-'samples/nybg_gold/NY_00198993.txt',
-]
-"""
 inputFileList = []
-inputFileListPath = open('inputs-nybg_gold.txt', 'r')
+inputFileListPath = open('inputs-test.txt', 'r')
 for line in inputFileListPath:
 	inputFileList.append(line.strip())
-"""
+
 # TODO use select pattern files from https://github.com/jbest/regex-repo as input
 patterns = [
 	{'regex':'(\w+)\W+(\d?\d)\W+(\d\d\d\d)','type':'date','short_name':'MonDDYYYY'},
@@ -66,6 +53,7 @@ abbrevESFilePath = 'dicts/es_abbr.txt'
 gazetteerFilePath = 'dicts/gazetteer.txt'
 personNamesFilePath = 'dicts/person_names.txt'
 specificEpithetFilePath = 'dicts/specific_epithets.txt'
+org_abbrev_file_path = 'dicts/org_abbr.txt'
 
 # Load dictionaries and other authority files
 dictionaries = []
@@ -79,6 +67,7 @@ dictionaries.append((load_dictionary(personNamesFilePath),'person name'))
 dictionaries.append((load_dictionary(familyFilePath),'family'))
 dictionaries.append((load_dictionary(genusFilePath),'genus'))
 dictionaries.append((load_dictionary(specificEpithetFilePath),'species'))
+dictionaries.append((load_dictionary(org_abbrev_file_path),'species'))
 
 unknowns = []
 matched_dates = []
@@ -185,11 +174,19 @@ for filePath in inputFileList:
 				total_unique_chars_in_patterns +=1
 			input_patterns_matched_chars += token_char_count
 			total_chars_in_patterns += token_char_count
+	combined_matched_chars = input_words_found_chars + input_unique_patterns_matched_chars
+	print '--- summmary ---'
+	print 'input file path:', filePath
+	print 'token_count:', token_count
+	print 'input_words_found:', input_words_found
+	print 'input_words_found_chars:', input_words_found_chars
+	print 'input_char_count:', input_char_count
+	print 'input_patterns_matched_chars:', input_patterns_matched_chars
+	print 'input_unique_patterns_matched_chars:', input_unique_patterns_matched_chars
+	print '--- score ---'
+	#print 'combined_matched_chars', combined_matched_chars
+	print 'combined char score', combined_matched_chars / float(input_char_count)
 
-"""
-for date in matched_dates:
-	print date
-"""
 total_word_score = total_words_matched / float(total_token_count)
 total_char_word_score = total_chars_in_words / float(total_char_count)
 
@@ -198,7 +195,7 @@ total_combined_char_score = (total_chars_in_words + total_unique_chars_in_patter
 #totalMatchedCharCount = input_words_found_chars + input_patterns_matched_chars
 #dsTotalCharacterScore = totalMatchedCharCount / float(input_char_count)
 endTime = datetime.now()
-print '--- summary ---'
+print '--- SUMMARY - all inputs ---'
 print 'inputs:', inputs
 print 'total_token_count', total_token_count
 print 'total_char_count', total_char_count
@@ -208,15 +205,17 @@ print 'total_chars_in_patterns', total_chars_in_patterns
 print 'total_unique_chars_in_patterns', total_unique_chars_in_patterns
 print 'total_chars_matched', total_unique_chars_in_patterns + total_chars_in_words
 print 'Time elapsed:', endTime - startTime
-print '--- scores ---'
+print '--- SCORES - all inputs ---'
 print 'total_word_score', total_word_score
 print 'total_char_word_score', total_char_word_score
-#print 'total_char_pattern_score', total_char_pattern_score
 print 'total_combined_char_score', total_combined_char_score
 
-
+# Some output for watching results and testing:
 
 """
+for date in matched_dates:
+	print date
+
 for word in unknowns:
 	if not word.isdigit():
 		print word
