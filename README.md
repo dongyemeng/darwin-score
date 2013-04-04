@@ -8,13 +8,11 @@ A method to evaluate text representing a natural history bio-collection object. 
 The included dictionaries have been developed through testing Darwin Score on a set of data from OCRed and transcribed herbarium labels. These dictionaries are sure to be incomplete and you will have to modify them to include words that you want to match when running Darwin Score. I'll be refining and adding some of the scripts I've written that help identify new words for inclusion in the dictionaries.
 
 ## Patterns
----
 
 Darwin Score currently has only two very simple regex patterns. One is to match dates and the other is to match numbers. These need improvment and other patterns need to be added to improve the accuracy of Darwin Score. In particular, there are many date formats that won't match the included pattern and no geolocation patterns have been added yet. Eventually I hope to build a robust pattern repository at https://github.com/jbest/regex-repo and use some or all of the patterns submitted there.
 
 
 ## Usage
----
 
 	python darwinscore.py
 
@@ -25,7 +23,9 @@ To use with your own input files, create an input file with the paths of the fil
 Please let me know your thoughts about how you would like to use this to score your own data, and how the scores should be output or stored.
 
 ## TODO
----
 
-Allow command line parameters for input, output, etc.
-Fix various character encoding issues
+- Allow command line parameters for input, output, etc.
+- Fix various character encoding issues
+- Error checking
+- Lots of little fixes to make it cleaner
+- What else? Let me know.
