@@ -147,3 +147,5 @@ Korber
 Talbot
 Tumer
 Yuncker
+Lundell
+Jefferson
