@@ -41,7 +41,15 @@ for line in inputFileListPath:
 # TODO use select pattern files from https://github.com/jbest/regex-repo as input
 patterns = [
 	{'regex':'(\w+)\W+(\d?\d)\W+(\d\d\d\d)','type':'date','short_name':'MonDDYYYY'},
-	{'regex':'[-+]?([0-9]*\.[0-9]+|[0-9]+)','type':'number','short_name':'number'}
+	{'regex':'[-+]?([0-9]*\.[0-9]+|[0-9]+)','type':'number','short_name':'number'},
+	#{'regex':'^\d{1,3}([,]\d{3})*$','type':'number','short_name':'number with commas'},
+	# from http://stackoverflow.com/questions/1359147/regex-for-comma-separated-number
+
+	#{'regex':'^-?\d{1,3}(,\d{3})*(\.\d\d)?$|^\.\d\d$','type':'number','short_name':'number'},
+	# from http://stackoverflow.com/questions/4246077/matching-numbers-with-regular-expressions-only-digits-and-commas
+
+	#{'regex':'/(?:^|\s)([1-9](?:\d*|(?:\d{0,2})(?:,\d{3})*)(?:\.\d*[1-9])?|0?\.\d*[1-9]|0)(?:\s|$)/','type':'number','short_name':'number with separator'}
+	# from http://stackoverflow.com/questions/5917082/regular-expression-to-match-numbers-with-or-without-commas-and-decimals-in-text
 	]
 
 wordsENFilePath = 'dicts/en_words.txt'
@@ -67,7 +75,7 @@ dictionaries.append((load_dictionary(personNamesFilePath),'person name'))
 dictionaries.append((load_dictionary(familyFilePath),'family'))
 dictionaries.append((load_dictionary(genusFilePath),'genus'))
 dictionaries.append((load_dictionary(specificEpithetFilePath),'species'))
-dictionaries.append((load_dictionary(org_abbrev_file_path),'species'))
+dictionaries.append((load_dictionary(org_abbrev_file_path),'organization'))
 
 unknowns = []
 matched_dates = []
@@ -142,7 +150,7 @@ for filePath in inputFileList:
 					#TODO Allow to add multiple patterns?
 					token['in_pattern'] = pattern['short_name']
 
-	#pprint.pprint(token_list)
+	pprint.pprint(token_list)
 
 	# Generate report
 	for token in token_list:
@@ -216,7 +224,7 @@ print 'total_combined_char_score', total_combined_char_score
 for date in matched_dates:
 	print date
 
+"""
 for word in unknowns:
 	if not word.isdigit():
 		print word
-"""
