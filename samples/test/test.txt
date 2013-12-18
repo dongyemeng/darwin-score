@@ -1,0 +1,8 @@
+A sample with some text and patterns to test.
+
+123
+1234
+1,234
+123,123
+1,123,123
+123,000.02
